@@ -1,0 +1,15 @@
+footer {
+  color: #eee;
+  background-color: #1a2332;
+  padding-top: 5rem;
+  margin-top: 5rem;
+}
+
+@media screen and (max-width: 576px) {
+  footer {
+    text-align: center !important;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+}

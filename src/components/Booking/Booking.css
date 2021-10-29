@@ -1,0 +1,11 @@
+.booking-img {
+  margin: 1rem auto;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.booking-card {
+  border-radius: 1rem;
+}

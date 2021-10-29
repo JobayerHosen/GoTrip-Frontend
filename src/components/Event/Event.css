@@ -1,0 +1,8 @@
+.bsCard img {
+  height: 280px;
+  object-fit: cover;
+}
+
+.bsCard {
+  margin-bottom: 3rem;
+}
