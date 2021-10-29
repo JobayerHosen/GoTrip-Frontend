@@ -1,52 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, FormControl, InputGroup, Row, Button, FloatingLabel, Form } from "react-bootstrap";
 import { useParams } from "react-router";
-import dtimg from "../../images/slide01.jpg";
+import useAuth from "../../hooks/useAuth";
 import "./Booking.css";
 
 const Booking = () => {
+  const [event, setEvent] = useState({});
+  const { user } = useAuth();
   const { id } = useParams();
 
-  //   useEffect(() => {}, [id]);
+  useEffect(() => {
+    fetch(`https://phwc-as11-server-jobayer.herokuapp.com/events/${id}`)
+      .then((res) => res.json())
+      .then((data) => setEvent(data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
   return (
-    <Container>
-      <h1 className="text-start">Bamboo Private Island near Coron</h1>
+    <Container className="mt-4">
+      <h1 className="text-start">{event?.title}</h1>
       <p className="text-muted text-start">
-        <span>5.0</span> | Coron, Philippines
+        <span>
+          <i className="bi bi-star-fill text-warning me-1"></i> {event?.rating}
+        </span>
+        &nbsp; | &nbsp; <i className="bi bi-geo-alt-fill text-main  me-1"></i> {event?.address}
       </p>
-      <img className="booking-img" src={dtimg} alt="" />
+      <img className="booking-img" src={event?.image} alt="" />
 
       <Row>
         <Col xs={12} md={8}>
           <div className="d-flex justify-content-between align-items-center p-3 mb-3 border-bottom">
-            <p className="d-inline-block fw-bold fs-3">Bamboo Private Island near Coron</p>
+            <p className="d-inline-block fw-bold fs-3">{event?.address}</p>
             <p className="d-inline-block text-main fw-bold fs-3">
-              $ 352 <span className="text-muted fs-5">/ night</span>
+              $ {event?.price} <span className="text-muted fs-5">/ night</span>
             </p>
           </div>
 
-          <ul className="text-start  p-3 mb-3 border-bottom">
-            <li>16 GUEST</li>
-            <li>7 BEDROOMS</li>
-            <li>7 BEDS</li>
-            <li>7 BATH</li>
+          <ul className="text-start  p-3 mb-3 border-bottom text-uppercase fw-bold">
+            {event?.features.split(".").map((feat) => (
+              <li>
+                <i className="bi bi-check-circle-fill text-main me-2 fs-5" />
+                {feat}
+              </li>
+            ))}
           </ul>
-          <p className="text-muted text-start  p-3 mb-3 border-bottom">
-            Do Coron in style! Choose a lush postcard-perfect tropical paradise with turquoise-blue waters,
-            powdery-white sand and coconut trees instead of the usual noisy and dirty choices the town has to offer. Our
-            island was just listed in SPOT's 10 Breathtaking Island Resorts Around the Philippines and has the richest
-            marine life, fabulous organic food, experienced and caring staff and thrilling activities to keep you coming
-            back!
-          </p>
+          <p className="text-muted text-start  p-3 mb-3 border-bottom">{event?.desc}</p>
         </Col>
         <Col xs={12} md={4}>
           <div className="booking-card p-3 shadow-lg bg-white">
             <div className="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom">
               <p className="d-inline-block text-main fw-bold fs-3">
-                $ 352 <span className="text-muted fs-6">/ night</span>
+                $ {event?.price} <span className="text-muted fs-6">/ night</span>
               </p>
-              <p className="d-inline-block fw-bold text-muted fs-6">@ 4.56</p>
+              <p className="d-inline-block fw-bold text-muted fs-6">
+                <i className="bi bi-star-fill text-warning me-1" />
+                {event?.rating}
+              </p>
             </div>
             <form>
               <div className="d-flex justify-content-between align-items-center mt-3">
@@ -76,7 +87,7 @@ const Booking = () => {
               <p className="d-inline-block mb-0 text-muted fs-6">User's Information</p>
 
               <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
-                <Form.Control type="text" placeholder="name" min="1" />
+                <Form.Control type="text" defaultValue={user.displayName} placeholder="name" min="1" />
               </FloatingLabel>
 
               <FloatingLabel controlId="floatingInput" label="Phone" className="mb-3">
