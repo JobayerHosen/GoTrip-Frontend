@@ -7,6 +7,15 @@ import "./Booking.css";
 const Booking = () => {
   const [event, setEvent] = useState({});
   const { user } = useAuth();
+
+  // CONTROLLED INPUT'S STATES
+  const [checkIn, setCheckIn] = useState("");
+  const [stayTime, setStayTime] = useState(1);
+  const [guests, setGuest] = useState(1);
+  const [name, setName] = useState(user.displayName || "");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,6 +26,15 @@ const Booking = () => {
         console.log(err);
       });
   }, [id]);
+
+  const handleBookingSubmit = (e) => {
+    e.preventDefault();
+    const userData = { uid: user.uid, name, email: user.email, phone, address };
+    const bookingData = { id, uid: user.uid, name, checkIn, stayTime, guests, status: "Pending" };
+
+    console.table(userData);
+    console.table(bookingData);
+  };
 
   return (
     <Container className="mt-4">
@@ -39,7 +57,7 @@ const Booking = () => {
           </div>
 
           <ul className="text-start  p-3 mb-3 border-bottom text-uppercase fw-bold">
-            {event?.features.split(".").map((feat) => (
+            {event?.features?.split(".").map((feat) => (
               <li>
                 <i className="bi bi-check-circle-fill text-main me-2 fs-5" />
                 {feat}
@@ -59,19 +77,23 @@ const Booking = () => {
                 {event?.rating}
               </p>
             </div>
-            <form>
+            <form onSubmit={handleBookingSubmit}>
               <div className="d-flex justify-content-between align-items-center mt-3">
                 <p className="d-inline-block mb-0 text-muted fs-6">Check In Date</p>
                 <p className="d-inline-block mb-0 text-muted fs-6">Nights to stay</p>
               </div>
               <InputGroup className="mb-3 mt-0" size="lg">
                 <FormControl
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
                   className="fs-6 text-muted mt-0 rounded-0 rounded-top"
                   type="date"
                   aria-label="Check In Date"
                   required
                 />
                 <FormControl
+                  value={stayTime}
+                  onChange={(e) => setStayTime(e.target.value)}
                   className="fs-6 text-muted mt-0 rounded-0 rounded-top"
                   type="number"
                   min="1"
@@ -81,20 +103,44 @@ const Booking = () => {
                 />
               </InputGroup>
               <FloatingLabel controlId="floatingInput" label="Number of Guest" className="mb-3">
-                <Form.Control type="number" placeholder="number of guest" min="1" />
+                <Form.Control
+                  value={guests}
+                  onChange={(e) => setGuest(e.target.value)}
+                  type="number"
+                  placeholder="number of guest"
+                  min="1"
+                />
               </FloatingLabel>
 
               <p className="d-inline-block mb-0 text-muted fs-6">User's Information</p>
 
               <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
-                <Form.Control type="text" defaultValue={user.displayName} placeholder="name" min="1" />
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="name"
+                  min="1"
+                />
               </FloatingLabel>
 
               <FloatingLabel controlId="floatingInput" label="Phone" className="mb-3">
-                <Form.Control type="text" placeholder="Phone" min="1" />
+                <Form.Control
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  type="text"
+                  placeholder="Phone"
+                  min="1"
+                />
               </FloatingLabel>
               <FloatingLabel controlId="floatingInput" label="Address" className="mb-3">
-                <Form.Control type="text" placeholder="Address" min="1" />
+                <Form.Control
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  type="text"
+                  placeholder="Address"
+                  min="1"
+                />
               </FloatingLabel>
 
               <Button type="submit" variant="danger" className="btn-main w-100">
