@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, FormControl, InputGroup, Row, Button, FloatingLabel, Form } from "react-bootstrap";
 import { useParams } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 import "./Booking.css";
 
 const Booking = () => {
   const [event, setEvent] = useState({});
   const { user } = useAuth();
+  const { addUser, updateUser } = useUser();
 
   // CONTROLLED INPUT'S STATES
   const [checkIn, setCheckIn] = useState("");
   const [stayTime, setStayTime] = useState(1);
   const [guests, setGuest] = useState(1);
   const [name, setName] = useState(user.displayName || "");
+  const [email, setEmail] = useState(user.email || "");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
   const { id } = useParams();
-
   useEffect(() => {
     fetch(`https://phwc-as11-server-jobayer.herokuapp.com/events/${id}`)
       .then((res) => res.json())
@@ -27,13 +29,57 @@ const Booking = () => {
       });
   }, [id]);
 
+  // GET USER'S PREVIOUSLY SAVED DATA
+  const [dbUser, setDbUser] = useState(null);
+  useEffect(() => {
+    fetch(`https://phwc-as11-server-jobayer.herokuapp.com/users/${user.uid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.email) {
+          setName(data.name);
+          setPhone(data.phone);
+          setAddress(data.address);
+          setDbUser(data);
+        }
+      })
+      .catch((err) => {
+        setDbUser(null);
+      });
+  }, []);
+
   const handleBookingSubmit = (e) => {
     e.preventDefault();
-    const userData = { uid: user.uid, name, email: user.email, phone, address };
-    const bookingData = { id, uid: user.uid, name, checkIn, stayTime, guests, status: "Pending" };
+    const userData = { uid: user.uid, name, email, phone, address };
+    const bookingData = {
+      evnetId: id,
+      uid: user.uid,
+      name,
+      email,
+      phone,
+      address,
+      checkIn,
+      stayTime,
+      guests,
+      totalPrice: event?.price * guests * stayTime,
+      status: "Pending",
+    };
 
-    console.table(userData);
-    console.table(bookingData);
+    // ADD OR UPDATE USERS INFO TO DATABASE FOR FUTURE USE
+    dbUser ? updateUser(user.uid, userData) : addUser(userData);
+
+    //PLACE BOOKING
+    fetch("https://phwc-as11-server-jobayer.herokuapp.com/orders/addOrder", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -48,6 +94,7 @@ const Booking = () => {
       <img className="booking-img" src={event?.image} alt="" />
 
       <Row>
+        {/* DETAILS  */}
         <Col xs={12} md={8}>
           <div className="d-flex justify-content-between align-items-center p-3 mb-3 border-bottom">
             <p className="d-inline-block fw-bold fs-3">{event?.address}</p>
@@ -58,7 +105,7 @@ const Booking = () => {
 
           <ul className="text-start  p-3 mb-3 border-bottom text-uppercase fw-bold">
             {event?.features?.split(".").map((feat) => (
-              <li>
+              <li key={feat}>
                 <i className="bi bi-check-circle-fill text-main me-2 fs-5" />
                 {feat}
               </li>
@@ -66,6 +113,8 @@ const Booking = () => {
           </ul>
           <p className="text-muted text-start  p-3 mb-3 border-bottom">{event?.desc}</p>
         </Col>
+
+        {/* BOOKING CARD  */}
         <Col xs={12} md={4}>
           <div className="booking-card p-3 shadow-lg bg-white">
             <div className="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom">
@@ -109,6 +158,7 @@ const Booking = () => {
                   type="number"
                   placeholder="number of guest"
                   min="1"
+                  required
                 />
               </FloatingLabel>
 
@@ -121,6 +171,16 @@ const Booking = () => {
                   type="text"
                   placeholder="name"
                   min="1"
+                  required
+                />
+              </FloatingLabel>
+              <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+                <Form.Control
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="Email"
+                  disabled
                 />
               </FloatingLabel>
 
@@ -131,6 +191,7 @@ const Booking = () => {
                   type="text"
                   placeholder="Phone"
                   min="1"
+                  required
                 />
               </FloatingLabel>
               <FloatingLabel controlId="floatingInput" label="Address" className="mb-3">
@@ -140,12 +201,17 @@ const Booking = () => {
                   type="text"
                   placeholder="Address"
                   min="1"
+                  required
                 />
               </FloatingLabel>
 
               <Button type="submit" variant="danger" className="btn-main w-100">
                 Book Now
               </Button>
+              <div className="d-flex justify-content-between align-items-center border-top text-center fw-bold mt-3 mb-0">
+                <h3>Total</h3>
+                <h3 className="">$ {event?.price * guests * stayTime || 0}</h3>
+              </div>
             </form>
           </div>
         </Col>
