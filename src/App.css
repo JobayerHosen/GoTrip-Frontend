@@ -2,6 +2,10 @@
 
 a {
   text-decoration: none;
+  color: #333;
+}
+a:hover {
+  color: #ff395c;
 }
 
 li {
@@ -29,6 +33,7 @@ img {
 }
 .btn-main:hover {
   background: #f5244b;
+  color: #f4fbff;
 }
 .text-main {
   color: #ff395c;
@@ -37,4 +42,22 @@ img {
 .bg-main {
   background: #ff395c;
   color: #fff;
+}
+.bg-1 {
+  background: #0dcaf0bf;
+  color: #fff;
+}
+.bg-2 {
+  background: #6f42c1bf;
+  color: #fff;
+}
+.bg-3 {
+  background: #20c997bf;
+  color: #fff;
+}
+
+@media screen and (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
 }

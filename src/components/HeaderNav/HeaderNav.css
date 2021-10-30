@@ -1,4 +1,51 @@
-.active {
+active {
   color: #e34;
   font-weight: bold;
+}
+
+nav a {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.user {
+  position: relative;
+}
+
+.user-icon {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px #7139ca88;
+  cursor: pointer;
+}
+
+.user-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.user-info {
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  z-index: 10;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 3px #2224;
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: all 0.5s ease;
+}
+
+.user-icon:hover .user-info {
+  visibility: visible;
+  opacity: 1;
 }

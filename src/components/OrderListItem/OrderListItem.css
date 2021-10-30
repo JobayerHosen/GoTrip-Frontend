@@ -1,0 +1,13 @@
+.listItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  width: 100%;
+  height: 10rem;
+  background-color: #d76078e7;
+  margin: 0 1rem 1rem 0;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  box-shadow: inset 100px 100px 0 100px #00000077;
+}

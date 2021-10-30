@@ -13,7 +13,7 @@ const Event = ({ event }) => {
           <Card.Title>{title}</Card.Title>
           <Card.Text className="text-muted fs-6">{desc.slice(0, 120) + "..."}</Card.Text>
           <NavLink to={`/booking/${_id}`}>
-            <Button variant="danger" className="btn-main">
+            <Button variant="danger" className="btn-main rounded-pill px-3">
               Book Now
             </Button>
           </NavLink>

@@ -16,8 +16,8 @@ const Home = () => {
       <Banner></Banner>
       <SectionTitle title="Most Popular Tours">
         <p>
-          Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed
-          congue consectetur, velit turpis faucibus odio eget volutpat odio lectus eu erat.
+          Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue
+          consectetur, velit turpis faucibus odio eget volutpat odio lectus eu erat.
         </p>
       </SectionTitle>
       <Events></Events>
