@@ -51,7 +51,7 @@ const Booking = () => {
     e.preventDefault();
     const userData = { uid: user.uid, name, email, phone, address };
     const bookingData = {
-      evnetId: id,
+      eventId: id,
       uid: user.uid,
       name,
       email,
