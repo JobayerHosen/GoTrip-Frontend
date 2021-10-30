@@ -13,7 +13,7 @@ const useOrders = () => {
       .catch((err) => {
         console.log("no orders found");
       });
-  }, []);
+  }, [allOrders]);
 
   useEffect(() => {
     fetch(`https://phwc-as11-server-jobayer.herokuapp.com/orders/user/${user.uid}`)
@@ -22,10 +22,21 @@ const useOrders = () => {
       .catch((err) => {
         console.log("no orders found");
       });
-  }, []);
+  }, [myOrders]);
 
   const deleteOrder = (id) => {
     let isYes = window.confirm("Do You Realy Want to Delete This Order?");
+    if (isYes) {
+      fetch(`https://phwc-as11-server-jobayer.herokuapp.com/orders/delete/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            setMyOrders([]);
+          }
+        });
+    }
     console.log(isYes);
   };
 

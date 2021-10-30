@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, FormControl, InputGroup, Row, Button, FloatingLabel, Form } from "react-bootstrap";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import "./Booking.css";
 
 const Booking = () => {
+  const history = useHistory();
   const [event, setEvent] = useState({});
   const { user } = useAuth();
   const { addUser, updateUser } = useUser();
@@ -76,7 +77,9 @@ const Booking = () => {
       body: JSON.stringify(bookingData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        history.push("/myOrders");
+      })
       .catch((err) => {
         console.log(err);
       });
