@@ -55,6 +55,15 @@ img {
   background: #20c997bf;
   color: #fff;
 }
+.text-1 {
+  color: #0dcaf0bf;
+}
+.text-2 {
+  color: #6f42c1bf;
+}
+.text-3 {
+  color: #20c997bf;
+}
 
 @media screen and (max-width: 576px) {
   html {

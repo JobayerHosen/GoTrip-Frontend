@@ -1,0 +1,17 @@
+.featured-title {
+  z-index: 10;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+}
+
+.hr {
+  position: absolute;
+  bottom: 0;
+  opacity: 1;
+  box-shadow: 125px 170px 126px 250px #000;
+  color: rgba(255, 255, 255, 0.268);
+}

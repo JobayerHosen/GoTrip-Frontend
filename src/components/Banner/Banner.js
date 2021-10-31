@@ -7,7 +7,11 @@ const Banner = () => {
     <div className="banner">
       <Container>
         <h1 className="banner-title">
-          YOUR ADVENTURE <br /> TRAVEL EXPERTS <br /> IN EUROPE!
+          ENJOY YOUR <br /> TRIP
+          <br />
+          <span style={{ fontFamily: "cursive" }} className="">
+            Like never <br /> before
+          </span>
         </h1>
       </Container>
     </div>

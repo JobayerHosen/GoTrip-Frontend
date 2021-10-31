@@ -24,6 +24,9 @@ const HeaderNav = () => {
             <NavLink className="text-decoration-none  t me-3" to="/allEvents" activeStyle={{ color: "#ff3344" }}>
               All Events
             </NavLink>
+            <NavLink className="text-decoration-none  t me-3" to="/about" activeStyle={{ color: "#ff3344" }}>
+              About
+            </NavLink>
           </Nav>
           {/* SHOW LOGIN OR LOGOUT BUTTON BASE ON LOGIN STATUS */}
           {!user ? (

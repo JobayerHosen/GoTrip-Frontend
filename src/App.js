@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound/NotFound";
 import MyOrders from "./components/MyOrders/MyOrders";
 import ManageOrders from "./components/ManageOrders/ManageOrders";
 import AddEvent from "./components/AddEvent/AddEvent";
+import WhyChooseUs from "./components/WhyChooseUs/WhyChooseUs";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
             <PrivateRoute path="/addEvent">
               <AddEvent></AddEvent>
             </PrivateRoute>
+            <Route exact path="/about">
+              <WhyChooseUs></WhyChooseUs>
+            </Route>
             <Route exact path="/spinner">
               <Spinner></Spinner>
             </Route>

@@ -5,9 +5,10 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 const AllEvents = () => {
   return (
     <div>
-      <SectionTitle title="All Events Opened Now">
-        Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue
-        consectetur, velit turpis faucibus odio eget volutpat odio lectus eu erat.
+      <SectionTitle title="Find Adventure That Suits You">
+        GoTrip is a World Leading Online Tour Booking Platform. Use Reserve Now & Pay Later to secure the activities you don't
+        want to miss without being locked in. You'll receive a full refund if you cancel at least 24 hours in advance of most
+        experiences.
       </SectionTitle>
       <Events></Events>
     </div>
