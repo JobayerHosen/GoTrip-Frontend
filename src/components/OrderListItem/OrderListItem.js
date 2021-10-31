@@ -5,7 +5,7 @@ import "./OrderListItem.css";
 
 const OrderListItem = ({ order, admin }) => {
   const [event, setEvent] = useState(null);
-  const { deleteOrder } = useOrders();
+  const { deleteOrder, approveOrder } = useOrders();
 
   useEffect(() => {
     fetch(`https://phwc-as11-server-jobayer.herokuapp.com/events/${order.eventId}`)
@@ -50,7 +50,7 @@ const OrderListItem = ({ order, admin }) => {
           </div>
           <div>
             {admin && (
-              <Button className="rounded-circle ms-2" title="update">
+              <Button onClick={() => approveOrder(order)} className="rounded-circle ms-2" title="update">
                 <i className="bi bi-pencil-square"></i>
               </Button>
             )}

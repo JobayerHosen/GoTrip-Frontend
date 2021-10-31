@@ -40,12 +40,35 @@ const useOrders = () => {
     console.log(isYes);
   };
 
+  const approveOrder = (order) => {
+    let isYes = window.confirm("Do You Realy Want to Approve This Order?");
+    if (isYes) {
+      order.status = "Approved";
+      console.log(JSON.stringify(order));
+      fetch(`https://phwc-as11-server-jobayer.herokuapp.com/orders/updateOrder/${order._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(order),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "Approved") {
+            setAllOrders([]);
+          }
+        });
+    }
+    console.log(isYes);
+  };
+
   return {
     allOrders,
     setAllOrders,
     myOrders,
     setMyOrders,
     deleteOrder,
+    approveOrder,
   };
 };
 
