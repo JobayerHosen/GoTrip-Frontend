@@ -107,7 +107,7 @@ const Booking = () => {
           </div>
 
           <ul className="text-start  p-3 mb-3 border-bottom text-uppercase fw-bold">
-            {event?.features?.split(".").map((feat) => (
+            {event?.features?.split(",").map((feat) => (
               <li key={feat}>
                 <i className="bi bi-check-circle-fill text-main me-2 fs-5" />
                 {feat}
