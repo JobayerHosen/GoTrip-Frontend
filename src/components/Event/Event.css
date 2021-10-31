@@ -6,4 +6,6 @@
 .bsCard {
   margin-bottom: 3rem;
   text-align: left;
+  overflow: hidden;
+  border-radius: 0.8rem;
 }

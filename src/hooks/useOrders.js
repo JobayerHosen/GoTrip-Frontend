@@ -37,7 +37,6 @@ const useOrders = () => {
           }
         });
     }
-    console.log(isYes);
   };
 
   const approveOrder = (order) => {
@@ -59,7 +58,6 @@ const useOrders = () => {
           }
         });
     }
-    console.log(isYes);
   };
 
   return {
