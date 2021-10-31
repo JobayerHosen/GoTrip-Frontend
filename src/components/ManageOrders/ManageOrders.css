@@ -3,7 +3,7 @@
   border-radius: 1rem;
   box-shadow: 0 0 10px 3px #2222221c;
   margin-top: 1rem;
-  height: calc((100vh - 150px));
+  height: calc((100vh - 100px));
 }
 
 .admin-side {
@@ -33,6 +33,7 @@
 .order-list {
   padding: 0 1rem;
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
 }
 
