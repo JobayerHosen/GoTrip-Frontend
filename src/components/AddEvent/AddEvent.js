@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Button, FloatingLabel, FormControl, Form, InputGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Event from "../Event/Event";
 import "./AddEvent.css";
 
 const AddEvent = () => {
@@ -16,9 +17,10 @@ const AddEvent = () => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(4.1);
 
+  const event = { title, desc, image, features, address, price, rating };
+
   const handleAddEvent = (e) => {
     e.preventDefault();
-    const event = { title, desc, image, features, address, price, rating };
 
     fetch("https://phwc-as11-server-jobayer.herokuapp.com/events/addEvent", {
       method: "POST",
@@ -97,8 +99,8 @@ const AddEvent = () => {
                 <hr />
                 <div className="order-list">
                   <Row>
-                    <Col xs={12} lg={7}>
-                      <div className="add-event-card p-3 shadow-lg bg-white">
+                    <Col xs={12} md={8}>
+                      <div className="add-event-card p-3 shadow bg-white mb-3">
                         <div className="d-flex justify-content-between align-items-center p-0 mb-2 border-bottom">
                           <p className="d-inline-block text-main fw-bold fs-5">
                             <span className="text-muted fs-5">Add Event</span>
@@ -187,6 +189,8 @@ const AddEvent = () => {
                         </form>
                       </div>
                     </Col>
+
+                    <Event event={event}></Event>
                   </Row>
                 </div>
               </div>
