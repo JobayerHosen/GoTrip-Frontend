@@ -1,8 +1,9 @@
 # GoTrip | A Tour Event Managing Agency
 
 # Live Demo: [GoTrip](https://phwc-task.web.app/).
+## [`Backend`](https://github.com/JobayerHosen/GoTrip-Backend)
 
-GoTrip is a tour managing agency web app usign MERN Stack. providing tour event managing services like: booking cottages, hiring boats, managing kyaking, skiying etc. Here people can find places to go somewhere and book necessary thinks right in the website by login in and providing infomation in the booking page.
+GoTrip is a tour managing agency web app using MERN Stack. providing tour event managing services like booking cottages, hiring boats, managing kayaking, skiing, etc. Here people can find places to go somewhere and book necessary things right on the website by login in and providing information on the booking page.
 
 ## Features :
 
